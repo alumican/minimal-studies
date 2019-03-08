@@ -1,0 +1,37 @@
+{
+  "name": "minimal-studies",
+  "version": "1.0.0",
+  "description": "Environment for minimal studies.",
+  "scripts": {
+    "preinstall": "npm install -g gulp-cli",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yukiya Okuda",
+  "license": "MIT",
+  "repository": {},
+  "dependencies": {},
+  "devDependencies": {
+    "ts-node": "*",
+    "typescript-require": "*",
+    "typescript": "*",
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "*",
+    "gulp-plumber": "*",
+    "gulp-remove-empty-lines": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-strip-comments": "*",
+    "gulp-tap": "*",
+    "gulp-typescript": "*",
+    "gulp-uglify": "*",
+    "gulp-connect": "*",
+    "@types/node": "*",
+    "@types/gulp": "*",
+    "@types/jquery": "*",
+    "@types/modernizr": "*",
+    "@types/paper": "*",
+    "@types/pixi.js": "*",
+    "@types/three": "*",
+    "@types/d3": "*"
+  }
+}

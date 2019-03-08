@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "es6",
+            "dom"
+        ],
+        "typeRoots": [
+            "build/node_modules/@types/"
+        ],
+        "types": [
+            "node",
+            "gulp",
+            "modernizr",
+            "jquery",
+            "pixi.js",
+            "paper",
+            "three",
+            "d3"
+        ]
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}

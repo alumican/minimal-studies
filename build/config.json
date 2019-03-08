@@ -1,0 +1,27 @@
+{
+	"projects": [
+		{ "name": "empty-example" },
+		{ "name": "paper-example" }
+	],
+	"default": {
+		"js": [{ "src": "script/main.ts", "dst": "js/main.js" }],
+		"css": [{ "src": "style/main.scss", "dst": "css/main.css" }],
+		"html": [{ "src": "index.html", "dst": "index.html" }]
+	},
+	"path": {
+		"src": "../src",
+		"deploy": "../deploy"
+	},
+	"server": {
+		"host": "localhost",
+		"port": 8765,
+		"livereload": false
+	},
+	"typeScript": {
+		"target": "ES5",
+		"lib": ["es6", "dom"],
+		"types": ["modernizr", "jquery", "paper", "pixi.js", "three", "d3"],
+		"alwaysStrict": true,
+		"forceConsistentCasingInFileNames": true
+	}
+}
