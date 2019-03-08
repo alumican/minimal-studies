@@ -87,17 +87,15 @@ https://nodejs.org/ja/
 `css`（オプション）デフォルトを置き換える`.scss` → `.css` のマッピングルール（記述方法は次項参照）  
 `html`（オプション）デフォルトを置き換える`.html` → `.html` のマッピングルール（記述方法は次項参照）  
 ```
-{
-	"projects": [
-		{ "name": "empty-example" },
-		{ "name": "paper-example",
-		  "js": [
-			  { "src": "script/index.ts", "dst": "js/index.js" },
-			  { "src": "script/sub.ts", "dst": "js/sub.js" }
-		  ]
-		}
-	],
-}
+"projects": [
+	{ "name": "empty-example" },
+	{ "name": "paper-example",
+		"js": [
+			{ "src": "script/index.ts", "dst": "js/index.js" },
+			{ "src": "script/sub.ts", "dst": "js/sub.js" }
+		]
+	}
+],
 ```
 
 ### デフォルトのマッピングルール（オプション）
@@ -109,14 +107,14 @@ https://nodejs.org/ja/
 `css`（オプション）`.scss` → `.css` のマッピングルール（配列になっているので複数指定可能）  
 `html`（オプション）`.html` → `.html` のマッピングルール（配列になっているので複数指定可能）  
 ```
-	"default": {
-		"js": [{ "src": "script/main.ts", "dst": "js/main.js" }],
-		"css": [{ "src": "style/main.scss", "dst": "css/main.css" }],
-		"html": [
-			{ "src": "index.html", "dst": "index.html" },
-			{ "src": "about.html", "dst": "about.html" }
-		]
-	},
+"default": {
+	"js": [{ "src": "script/main.ts", "dst": "js/main.js" }],
+	"css": [{ "src": "style/main.scss", "dst": "css/main.css" }],
+	"html": [
+		{ "src": "index.html", "dst": "index.html" },
+		{ "src": "about.html", "dst": "about.html" }
+	]
+},
 ```
 
 ### ローカルサーバ情報（オプション）
@@ -126,24 +124,24 @@ https://nodejs.org/ja/
 `port`（オプション）ポート番号（デフォルト `8000`）  
 `livereload`（オプション）`true`の場合、コンパイル後にブラウザをリロードする（デフォルト `true`）  
 ```
-	"server": {
-		"host": "localhost",
-		"port": 8765,
-		"livereload": true
-	},
+"server": {
+	"host": "localhost",
+	"port": 8765,
+	"livereload": true
+},
 ```
 
 ### TypeScriptオプション（オプション）
 以下を参照  
 https://www.typescriptlang.org/docs/handbook/compiler-options.html
 ```
-	"typeScript": {
-		"target": "ES5",
-		"lib": ["es6", "dom"],
-		"types": ["modernizr", "jquery", "paper", "pixi.js", "three", "d3"],
-		"alwaysStrict": true,
-		"forceConsistentCasingInFileNames": true
-	}
+"typeScript": {
+	"target": "ES5",
+	"lib": ["es6", "dom"],
+	"types": ["modernizr", "jquery", "paper", "pixi.js", "three", "d3"],
+	"alwaysStrict": true,
+	"forceConsistentCasingInFileNames": true
+}
 ```
 
 ## Lisence
