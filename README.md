@@ -34,7 +34,7 @@ https://nodejs.org/ja/
 ### ./build.sh install
 コンパイル環境のインストールをおこなう
 
-### ./build.sh install
+### ./build.sh uninstall
 コンパイル環境のアンインストールをおこなう
 
 ## Config.json
