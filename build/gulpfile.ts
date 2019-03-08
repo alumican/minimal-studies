@@ -52,6 +52,15 @@ const projects:Projects = config.projects;
 const projectDefault:ProjectDefault = config.default;
 const path:Path = config.path;
 
+function getOption(option:any, key:string, defaultValue:any):any {
+	return typeof option[key] !== 'undefined' ? option[key] : defaultValue;
+}
+
+const typeScriptOption:any = config.typeScript || {};
+typeScriptOption.declaration = getOption(typeScriptOption, 'declaration', false);
+typeScriptOption.removeComments = getOption(typeScriptOption, 'removeComments', true);
+typeScriptOption.typeRoots = getOption(typeScriptOption, 'typeRoots', ['node_modules/@types/']);
+
 
 
 
@@ -86,18 +95,11 @@ const color:any = {
 	reset  : '\u001b[0m'
 };
 
-function getTypescriptOptions(generateDeclaration:boolean = false, outputFileName:string = ''):any {
-	const option:any = {
-		declaration: generateDeclaration,
-		removeComments: true,
-		'typeRoots': ['node_modules/@types/']
-	};
-	const o:TypeScriptOption = config.typeScript;
-	if (o.target !== undefined) option.target = o.target;
-	if (o.lib !== undefined) option.lib = o.lib;
-	if (o.types !== undefined) option.types = o.types;
-	if (outputFileName !== '') option.outFile = outputFileName;
-	return option;
+function getTypescriptOptions(outputFileName:string = ''):any {
+	if (outputFileName != '') {
+		typeScriptOption.outFile = outputFileName;
+	}
+	return typeScriptOption;
 }
 
 function registerTask(taskName:string, projectName:string, map:Mapping, getCommands:GetCommandsFunction) {
@@ -141,7 +143,7 @@ function registerTypeScript(projectName:string, map:Mapping, index:number):strin
 	registerTask(taskName, projectName, map, function(srcFileName:string, dstFileName:string):any[] {
 		return [
 			sourcemaps.init('./'),
-			typescript(getTypescriptOptions(false, dstFileName)),
+			typescript(getTypescriptOptions(dstFileName)),
 			sourcemaps.write('./')
 		]
 	});
@@ -225,25 +227,16 @@ function registerProject(project:Project):void {
 }
 
 function registerServer():void {
-	const o:ServerOption = config.server;
-	if (o) {
-		const option:any = {
-			host: "localhost",
-			port: 8000,
-			livereload: true
-		};
-		if (o.host !== undefined) option.host = o.host;
-		if (o.port !== undefined) option.port = o.port;
-		if (o.livereload !== undefined) option.livereload = o.livereload;
+	const optopn:any = config.server;
+	if (optopn) {
+		optopn.root = path.deploy;
+		optopn.host = getOption(optopn, 'host', 'localhost');
+		optopn.port = getOption(optopn, 'port', 8000);
+		optopn.livereload = getOption(optopn, 'livereload', true);
 	
 		console.log(indent + 'Starting server');
 		gulp.task('server', function():void {
-			connect.server({
-				host: option.host,
-				port: option.port,
-				root: path.deploy,
-				livereload: option.livereload
-			});
+			connect.server(optopn);
 		});
 		watchTaskNames.push('server');
 	}

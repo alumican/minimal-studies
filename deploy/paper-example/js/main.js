@@ -1,3 +1,4 @@
+"use strict";
 paper.setup('myCanvas');
 paper.view.onFrame = onFrame;
 paper.view.onResize = onResize;

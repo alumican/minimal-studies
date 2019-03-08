@@ -15,13 +15,14 @@
 	"server": {
 		"host": "localhost",
 		"port": 8765,
-		"livereload": false
+		"livereload": true
 	},
 	"typeScript": {
 		"target": "ES5",
 		"lib": ["es6", "dom"],
 		"types": ["modernizr", "jquery", "paper", "pixi.js", "three", "d3"],
 		"alwaysStrict": true,
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"removeComments": true
 	}
 }
