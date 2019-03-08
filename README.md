@@ -1,5 +1,7 @@
 # minimal-studies
-JavaScriptで表現プロトタイピングを大量におこないたい人が、手っ取り早く始められるためのプロジェクトテンプレート、およびそのコンパイルシステム
+JavaScriptでビジュアルプロトタイピングを手っ取り早く始められるためのプロジェクトテンプレート、およびそのコンパイルシステム
+
+This is a project template for quickly starting visual prototyping with JavaScript, including compilation system.
 
 ## Feature
 - `TypeScript` + `sass`
@@ -146,11 +148,13 @@ https://www.typescriptlang.org/docs/handbook/compiler-options.html
 
 ## Lisence
 
-本リポジトリ内の独自のコードは、MITライセンスとする
+本リポジトリ内の独自のコードは、MITライセンスとする。ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js`などの各ライブラリに関しては、各ライブラリそれぞれのライセンスに準ずる  
 
-ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js`などの各ライブラリに関しては、各ライブラリそれぞれのライセンスに準ずる
 
-MIT Lisence
+The original code in this repository is MIT license.
+However, for library such as `jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` and so on, it complies with each license of each library.
+
+**MIT Lisence**
 
 Copyright 2018, Yukiya Okuda  
 http://alumican.net
