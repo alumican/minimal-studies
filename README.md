@@ -9,7 +9,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 
 ## Getting Started
 1. `node.js`をインストールする  
-https://nodejs.org/ja/
+https://nodejs.org/
 2. ターミナルで`minimal-studies`ディレクトリに移動する
 3. ターミナルで`./build.sh`を実行してインストールする
 4. ターミナルで`./build.sh watch`を実行するとファイル監視を始め、サーバが起動する
@@ -22,7 +22,7 @@ https://nodejs.org/ja/
 3. 必要に応じて、TypeScript、Sass、HTMLのマッピングルールを追加する
 4. すでに`./build.sh watch`をおこなっている場合は、一度終了させて再度watchすることで新規プロジェクトが監視対象になる
 
-## Gulp Commands
+## Build Commands
 `minimal-studies`ディレクトリで以下のコマンドを実行できる
 
 ### ./build.sh
@@ -38,7 +38,7 @@ https://nodejs.org/ja/
 コンパイル環境のアンインストールをおこなう
 
 ## Config.json
-プロジェクトのコンパイルルールを指定する
+`build/Config.json`によって、プロジェクトの定義やのコンパイルのルールを指定する
 
 例
 ```
@@ -80,7 +80,7 @@ https://nodejs.org/ja/
 ```
 
 ### プロジェクト一覧（必須）
-コンパイルに含めたいプロジェクトをリストする
+コンパイルに含めたいプロジェクトを定義する
 
 `name`（必須）プロジェクトのディレクトリ名  
 `js`（オプション）デフォルトを置き換える`.ts` → `.js` のマッピングルール（記述方法は次項参照）  
