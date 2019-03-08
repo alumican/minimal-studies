@@ -4,7 +4,7 @@ JavaScriptでビジュアルプロトタイピングを手っ取り早く始め�
 This is a project template for quickly starting visual prototyping with JavaScript, including compilation system.
 
 ## Feature
-- `TypeScript` + `sass`
+- `TypeScript` + `Sass`
 - `Gulp.js`による自動コンパイル、ローカルサーバ起動
 
 ## Getting Started
@@ -19,7 +19,7 @@ https://nodejs.org/ja/
 ## Create Your Project
 1. `src`ディレクトリ直下に、任意の名前のディレクトリを作成する
 2. `build/config.json`の`projects`に、作成したディレクトリ名を追加する
-3. 必要に応じて、TypeScript、sass、htmlのマッピングルールを追加する
+3. 必要に応じて、TypeScript、Sass、HTMLのマッピングルールを追加する
 4. すでに`./build.sh watch`をおこなっている場合は、一度終了させて再度watchすることで新規プロジェクトが監視対象になる
 
 ## Gulp Commands
