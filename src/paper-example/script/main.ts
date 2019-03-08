@@ -1,5 +1,6 @@
 /// <reference types="paper" />
 
+// original js code
 // http://paperjs.org/examples/smoothing/
 
 paper.setup('myCanvas');

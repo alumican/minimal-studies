@@ -146,7 +146,7 @@ https://www.typescriptlang.org/docs/handbook/compiler-options.html
 
 ## Lisence
 
-本リポジトリ内の独自のコードは、MITライセンスとする。ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js`などの各ライブラリに関しては、各ライブラリそれぞれのライセンスに準ずる  
+本リポジトリ内の独自のコードは、MITライセンスとする。ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js`などの各ライブラリに関するものは、各ライブラリそれぞれのライセンスに準ずる  
 
 
 The original code in this repository is MIT license.
