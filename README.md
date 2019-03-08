@@ -37,8 +37,8 @@ https://nodejs.org/
 ### ./build.sh uninstall
 コンパイル環境のアンインストールをおこなう
 
-## Config.json
-`build/Config.json`によって、プロジェクトの定義やのコンパイルのルールを指定する
+## Settings
+`build/config.json`によって、プロジェクトの定義やのコンパイルのルールを指定する
 
 例
 ```
@@ -132,7 +132,7 @@ https://nodejs.org/
 ```
 
 ### TypeScriptオプション（オプション）
-以下を参照  
+追加可能なオプションは以下を参照  
 https://www.typescriptlang.org/docs/handbook/compiler-options.html
 ```
 "typeScript": {
