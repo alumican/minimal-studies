@@ -5,11 +5,10 @@ This is a project template for quickly starting visual prototyping with JavaScri
 
 ## Feature
 - `TypeScript` + `Sass`
-- `Gulp.js`による自動コンパイル、ローカルサーバ起動
+- `Gulp 4`による自動コンパイル、ローカルサーバ起動
 
 ## Getting Started
-1. `node.js`をインストールする  
-https://nodejs.org/
+1. `node.js`をインストールする https://nodejs.org/
 2. ターミナルで`minimal-studies`ディレクトリに移動する
 3. ターミナルで`./build.sh`を実行してインストールする
 4. ターミナルで`./build.sh watch`を実行するとファイル監視を始め、サーバが起動する
@@ -132,8 +131,7 @@ https://nodejs.org/
 ```
 
 ### TypeScriptオプション（オプション）
-追加可能なオプションは以下を参照  
-https://www.typescriptlang.org/docs/handbook/compiler-options.html
+追加可能なオプションは[TypeScript Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)を参照
 ```
 "typeScript": {
 	"target": "ES5",
@@ -144,13 +142,37 @@ https://www.typescriptlang.org/docs/handbook/compiler-options.html
 }
 ```
 
+## Using Libraries
+`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` `modernizr`の型定義ファイルはデフォルトで含んでいるので、利用する場合は`.ts`の中でそれぞれ以下のように参照する。また、別途HTMLに`<script>`タグで`lib`以下の該当の`.js`を読み込む
+```
+/// <reference types="jquery" />
+/// <reference types="paper" />
+/// <reference types="pixi.js" />
+/// <reference types="three" />
+/// <reference types="d3" />
+/// <reference types="modernizr" />
+```
+
+### 新たな型定義を@typesから追加する
+[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)に公開されている型定義を追加する場合、`tsconfig.json`、`build/package.json`、`build/config.json/typeScript/types`にパッケージ名を追記してから`buiuld install.sh`するとインストールできるので、利用側の`.ts`で以下のように宣言する
+```
+/// <reference types="xxx" />
+```
+
+### 新たな型定義を直接追加する
+独自の`d.ts`やDefinitelyTypedにない型定義は、`deploy/lib`や各々のプロジェクトディレクトリの任意の場所において、利用側の`.ts`で以下のようにパスを通す
+```
+<reference path="path/to/xxx.d.ts" />
+```
+
+### d.tsから追加する
+
 ## Lisence
 
 本リポジトリ内の独自のコードは、MITライセンスとする。ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js`などの各ライブラリに関するものは、各ライブラリそれぞれのライセンスに準ずる  
 
-
-The original code in this repository is MIT license.
-However, for library such as `jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` and so on, it complies with each license of each library.
+The original codes in this repository are licensed under the MIT.
+However, for libraries such as `jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` and so on, it follow each license of each library.
 
 **MIT Lisence**
 
@@ -162,3 +184,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# Contact
+[@alumican_net](https://twitter.com/alumican_net)
