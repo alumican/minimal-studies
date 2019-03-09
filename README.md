@@ -1,5 +1,5 @@
 # minimal-studies
-JavaScriptでビジュアルプロトタイピングを手っ取り早く始められるためのプロジェクトテンプレート、およびそのコンパイルシステム
+JavaScriptでビジュアルプロトタイピングを手っ取り早く始めるためのプロジェクトテンプレート、およびそのコンパイルシステム
 
 This is a project template for quickly starting visual prototyping with JavaScript, including compilation system.
 
