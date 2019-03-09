@@ -25,7 +25,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 `minimal-studies`ディレクトリで以下のコマンドを実行できる
 
 ### ./build.sh
-コンパイル環境が未インストールの場合はインストールをおこない、それからコンパイルする。既に環境がインストールされている場合はコンパイルのみをおこなう
+コンパイル環境が未インストールの場合はインストールとコンパイルをおこなう。既に環境がインストールされている場合はコンパイルのみをおこなう
 
 ### ./build.sh watch
 `.ts` `.scss` `.html`の変更を検出して自動的にコンパイルをおこなう。ローカルサーバの起動をおこなう。`ctrl + c`で終了する
