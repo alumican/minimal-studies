@@ -102,7 +102,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 
 各ルールにおいて、`src`は`src/プロジェクトディレクトリ`以下のパス、`dst`は`deploy/プロジェクトディレクトリ`以下のパスから始まる
 
-`js`（オプション）`.ts` → `.js` のマッピングルール番号（デフォルト `8000`）  
+`js`（オプション）`.ts` → `.js` のマッピングルール番号（配列になっているので複数指定可能）   
 `css`（オプション）`.scss` → `.css` のマッピングルール（配列になっているので複数指定可能）  
 `html`（オプション）`.html` → `.html` のマッピングルール（配列になっているので複数指定可能）  
 ```
