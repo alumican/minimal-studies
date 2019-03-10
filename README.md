@@ -12,7 +12,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 2. ターミナルで`minimal-studies`ディレクトリに移動する
 3. ターミナルで`./build.sh`を実行してインストールする
 4. ターミナルで`./build.sh watch`を実行するとファイル監視を始め、サーバが起動する
-5. プロジェクト`○○○-example`に含まれる`.ts` `.scss` `.html`を更新すると、該当プロジェクトが`deploy`以下に自動的にコンパイルされる
+5. プロジェクト`src/xxx-example`に含まれる`.ts` `.scss` `.html`を更新すると、該当プロジェクトが`deploy`以下に自動的にコンパイルされる
 6. http://localhost:8765/ へアクセスして実行結果を確認する
 
 ## Create Your Project
@@ -162,7 +162,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 ### 新たな型定義を直接追加する
 独自の`d.ts`やDefinitelyTypedにない型定義は、`deploy/lib`や各々のプロジェクトディレクトリの任意の場所において、利用側の`.ts`で以下のようにパスを通して使う
 ```
-<reference path="path/to/xxx.d.ts" />
+/// <reference path="path/to/xxx.d.ts" />
 ```
 
 ### d.tsから追加する
