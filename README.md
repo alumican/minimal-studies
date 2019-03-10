@@ -165,8 +165,6 @@ This is a project template for quickly starting visual prototyping with JavaScri
 /// <reference path="path/to/xxx.d.ts" />
 ```
 
-### d.tsから追加する
-
 ## Lisence
 
 本リポジトリ内の独自のコードは、MITライセンスとする。ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js`などの各ライブラリに関するものは、各ライブラリそれぞれのライセンスに準ずる  
