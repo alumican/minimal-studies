@@ -10,9 +10,7 @@ type Project = { name:string, js:Mapping[], css:Mapping[], html:Mapping[] };
 type ProjectDefault = { js:Mapping[], css:Mapping[], html:Mapping[] };
 type Projects = Project[];
 type Path = { src:string, deploy:string };
-type TypeScriptOption = { target?:string, lib?:string[], types?:string[] };
-type ServerOption = { host?:string, port?:number, root?:string, livereload?:boolean };
-type Config = { projects:Projects, default:ProjectDefault, path:Path, typeScript:TypeScriptOption, server:ServerOption };
+type Config = { projects:Projects, default:ProjectDefault, path:Path, typeScript?:any, server?:any };
 
 
 
