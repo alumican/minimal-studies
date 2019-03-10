@@ -154,13 +154,13 @@ This is a project template for quickly starting visual prototyping with JavaScri
 ```
 
 ### 新たな型定義を@typesから追加する
-[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)に公開されている型定義を追加する場合、`tsconfig.json`、`build/package.json`、`build/config.json/typeScript/types`にパッケージ名を追記してから`buiuld install.sh`するとインストールできるので、利用側の`.ts`で以下のように宣言する
+[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)に公開されている型定義を追加する場合、`build/config.json`の`typeScript.types`にパッケージ名を追記してから`build install.sh`するとインストールされるので、利用側の`.ts`で以下のように宣言して使う
 ```
 /// <reference types="xxx" />
 ```
 
 ### 新たな型定義を直接追加する
-独自の`d.ts`やDefinitelyTypedにない型定義は、`deploy/lib`や各々のプロジェクトディレクトリの任意の場所において、利用側の`.ts`で以下のようにパスを通す
+独自の`d.ts`やDefinitelyTypedにない型定義は、`deploy/lib`や各々のプロジェクトディレクトリの任意の場所において、利用側の`.ts`で以下のようにパスを通して使う
 ```
 <reference path="path/to/xxx.d.ts" />
 ```
