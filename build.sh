@@ -1,12 +1,20 @@
 #!/bin/sh
 
+install () {
+    node install.js && npm install;
+}
+
+uninstall () {
+    rm -r -f node_modules && rm -f package-lock.json && rm -f ../tsconfig.json && rm -r -f tmp;
+}
+
 if [ $# -ge 1 ]; then
     if [ $1 = "install" ]; then
         # install node modules
-        (cd build && npm install);
+        (cd build && install);
     elif [ $1 = "uninstall" ]; then
         # remove node modules, package-lock.json, tmp directory
-        (cd build && rm -r -f node_modules && rm -f package-lock.json && rm -r -f tmp);
+        (cd build && uninstall);
     else
         # run gulp task
         (cd build && gulp $1);
@@ -17,6 +25,6 @@ else
         (cd build && gulp);
     else
         # install 
-        (cd build && npm install && gulp);
+        (cd build && install && gulp);
     fi
 fi
