@@ -36,3 +36,6 @@ src/!(*-example|common)/
 deploy/!(*-example|common)/
 *backup*
 **.webloc
+
+### Auto generated ###
+tsconfig.json
