@@ -20,7 +20,7 @@
 	"typeScript": {
 		"target": "ES5",
 		"lib": ["es6", "dom"],
-		"types": ["modernizr", "jquery", "paper", "pixi.js", "three", "d3"],
+		"types": ["jquery", "paper", "pixi.js", "three", "d3", "modernizr", "dat.gui", "stats.js"],
 		"alwaysStrict": true,
 		"forceConsistentCasingInFileNames": true,
 		"removeComments": true

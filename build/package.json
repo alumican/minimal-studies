@@ -1,7 +1,7 @@
 {
   "name": "minimal-studies",
   "version": "1.0.0",
-  "description": "Environment for minimal studies.",
+  "description": "This is a project template for quickly starting visual prototyping with JavaScript, including build system.",
   "scripts": {
     "preinstall": "npm install -g gulp-cli",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,11 +27,13 @@
     "gulp-connect": "*",
     "@types/node": "*",
     "@types/gulp": "*",
-    "@types/modernizr": "*",
     "@types/jquery": "*",
     "@types/paper": "*",
     "@types/pixi.js": "*",
     "@types/three": "*",
-    "@types/d3": "*"
+    "@types/d3": "*",
+    "@types/modernizr": "*",
+    "@types/dat.gui": "*",
+    "@types/stats.js": "*"
   }
 }

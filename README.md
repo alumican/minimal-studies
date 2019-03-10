@@ -1,7 +1,7 @@
 # minimal-studies
 JavaScriptでビジュアルプロトタイピングを手っ取り早く始めるためのプロジェクトテンプレート、およびそのコンパイルシステム
 
-This is a project template for quickly starting visual prototyping with JavaScript, including compilation system.
+This is a project template for quickly starting visual prototyping with JavaScript, including build system.
 
 ## Feature
 - `TypeScript` + `Sass`
@@ -143,7 +143,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 ```
 
 ## Using Libraries
-`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` `modernizr`の型定義ファイルはデフォルトで含んでいるので、利用する場合は`.ts`の中でそれぞれ以下のように参照する。また、別途HTMLに`<script>`タグで`lib`以下の該当の`.js`を読み込む
+`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` `modernizr` `dat.gui` `stats.js`はデフォルトで含まれてので、利用する場合は`.ts`の中でそれぞれ以下のように参照する。また、別途HTMLに`<script>`タグで`lib`以下の該当の`.js`を読み込む
 ```
 /// <reference types="jquery" />
 /// <reference types="paper" />
@@ -151,6 +151,8 @@ This is a project template for quickly starting visual prototyping with JavaScri
 /// <reference types="three" />
 /// <reference types="d3" />
 /// <reference types="modernizr" />
+/// <reference types="dat.gui" />
+/// <reference types="stats.js" />
 ```
 
 ### 新たな型定義を@typesから追加する
@@ -167,10 +169,10 @@ This is a project template for quickly starting visual prototyping with JavaScri
 
 ## Lisence
 
-本リポジトリ内の独自のコードは、MITライセンスとする。ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js`などの各ライブラリに関するものは、各ライブラリそれぞれのライセンスに準ずる  
+本リポジトリ内の独自のコードは、MITライセンスとする。ただし`jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` `modernizr` `dat.gui` `stats.js`などの各ライブラリに関するものは、各ライブラリそれぞれのライセンスに準ずる  
 
 The original codes in this repository are licensed under the MIT.
-However, for libraries such as `jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` and so on, it follow each license of each library.
+However, for libraries such as `jQuery` `Paper.js` `PixiJS` `three.js` `D3.js` `modernizr` `dat.gui` `stats.js` and so on, it follow each license of each library.
 
 **MIT Lisence**
 
