@@ -42,6 +42,10 @@ This is a project template for quickly starting visual prototyping with JavaScri
 例
 ```
 {
+	"path": {
+		"src": "src",
+		"dst": "deploy"
+	},
 	"projects": [
 		{ "name": "empty-example" },
 		{ "name": "paper-example",
@@ -59,10 +63,6 @@ This is a project template for quickly starting visual prototyping with JavaScri
 			{ "src": "about.html", "dst": "about.html" }
 		]
 	},
-	"path": {
-		"src": "../src",
-		"deploy": "../deploy"
-	},
 	"server": {
 		"host": "localhost",
 		"port": 8765,
@@ -71,15 +71,35 @@ This is a project template for quickly starting visual prototyping with JavaScri
 	"typeScript": {
 		"target": "ES5",
 		"lib": ["es6", "dom"],
-		"types": ["modernizr", "jquery", "paper", "pixi.js", "three", "d3"],
+		"types": ["jquery", "paper", "pixi.js", "three", "d3", "modernizr", "dat.gui", "stats.js"],
+		"forceConsistentCasingInFileNames": true,
 		"alwaysStrict": true,
-		"forceConsistentCasingInFileNames": true
+		"removeComments": true,
+		"declaration": false,
+		"sourceMap": true,
+		"minify": false
+	},
+	"sass": {
+		"outputStyle": "expanded",
+		"sourceMap": false
 	}
 }
 ```
 
+### パス（必須）
+プロジェクトのソースと出力それぞれのルートディレクトリを指定する
+
+`src`（必須）プロジェクトのソースを配置するルートディレクトリ   
+`dst`（必須）プロジェクトの出力を配置するルートディレクトリ   
+```
+"path": {
+	"src": "src",
+	"dst": "deploy"
+},
+```
+
 ### プロジェクト一覧（必須）
-コンパイルに含めたいプロジェクトを定義する
+コンパイルに含めたいプロジェクトを指定する
 
 `name`（必須）プロジェクトのディレクトリ名  
 `js`（オプション）デフォルトを置き換える`.ts` → `.js` のマッピングルール（記述方法は次項参照）  
@@ -100,7 +120,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 ### デフォルトのマッピングルール（オプション）
 ここに書いたマッピングルールは、各プロジェクトに共通で利用される。`default`を省略すると全てプロジェクトに個別にルールを記述する必要がある
 
-各ルールにおいて、`src`は`src/プロジェクトディレクトリ`以下のパス、`dst`は`deploy/プロジェクトディレクトリ`以下のパスから始まる
+各ルールにおいて、`src`は`path.src`で指定されたパスを、`dst`は`path.dst`で指定されたパスを基点とする
 
 `js`（オプション）`.ts` → `.js` のマッピングルール（配列になっているので複数指定可能）   
 `css`（オプション）`.scss` → `.css` のマッピングルール（配列になっているので複数指定可能）  
@@ -117,7 +137,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 ```
 
 ### ローカルサーバ情報（オプション）
-`./build.sh watch`によって起動するローカルサーバの設定値。`server`自体を省略するとローカルサーバを立ち上げない
+`./build.sh watch`によって起動するローカルサーバの設定値。`server`自体を省略するとローカルサーバを立ち上げない  
 
 `host`（オプション）ポスト名（デフォルト `localhost`）  
 `port`（オプション）ポート番号（デフォルト `8000`）  
@@ -131,14 +151,31 @@ This is a project template for quickly starting visual prototyping with JavaScri
 ```
 
 ### TypeScriptオプション（オプション）
-追加可能なオプションは[TypeScript Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)を参照
+`minify`（オプション）圧縮した`.min.js`を出力する場合は`true`（デフォルト `false`）  
+
+その他のオプションは[TypeScript Compiler Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)を参照
 ```
 "typeScript": {
 	"target": "ES5",
 	"lib": ["es6", "dom"],
-	"types": ["modernizr", "jquery", "paper", "pixi.js", "three", "d3"],
+	"types": ["jquery", "paper", "pixi.js", "three", "d3", "modernizr", "dat.gui", "stats.js"],
+	"forceConsistentCasingInFileNames": true,
 	"alwaysStrict": true,
-	"forceConsistentCasingInFileNames": true
+	"removeComments": true,
+	"declaration": false,
+	"sourceMap": true,
+	"minify": false
+},
+```
+
+### Sassオプション（オプション）
+`sourceMap`（オプション）ソースマップを出力する場合は`true`（デフォルト `false`）  
+
+その他のオプションは[gulp-sass](https://www.npmjs.com/package/gulp-sass)を参照
+```
+"sass": {
+	"outputStyle": "expanded",
+	"sourceMap": false
 }
 ```
 

@@ -35,13 +35,6 @@ saveJson(packageJson, './package.json');
 // create tsconfig.json
 const compilerOptions = configJson.typeScript || {};
 delete compilerOptions.include;
+delete compilerOptions.minify;
 compilerOptions.typeRoots = [ 'build/node_modules/@types/' ];
 saveJson({ compilerOptions: compilerOptions }, '../tsconfig.json');
-
-/*
-const compilerOptions = {};
-compilerOptions.lib = getOption(configJson.typeScript, 'lib', ['es6', 'dom']);
-compilerOptions.types = getOption(configJson.typeScript, 'types', []).concat(['node', 'gulp']);
-compilerOptions.typeRoots = [ 'build/node_modules/@types/' ];
-saveJson({ compilerOptions: compilerOptions }, '../tsconfig.json');
-*/

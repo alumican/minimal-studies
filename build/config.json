@@ -1,4 +1,8 @@
 {
+	"path": {
+		"src": "src",
+		"dst": "deploy"
+	},
 	"projects": [
 		{ "name": "empty-example" },
 		{ "name": "paper-example" }
@@ -7,10 +11,6 @@
 		"js": [{ "src": "script/main.ts", "dst": "js/main.js" }],
 		"css": [{ "src": "style/main.scss", "dst": "css/main.css" }],
 		"html": [{ "src": "index.html", "dst": "index.html" }]
-	},
-	"path": {
-		"src": "../src",
-		"deploy": "../deploy"
 	},
 	"server": {
 		"host": "localhost",
@@ -21,8 +21,15 @@
 		"target": "ES5",
 		"lib": ["es6", "dom"],
 		"types": ["jquery", "paper", "pixi.js", "three", "d3", "modernizr", "dat.gui", "stats.js"],
-		"alwaysStrict": true,
 		"forceConsistentCasingInFileNames": true,
-		"removeComments": true
+		"alwaysStrict": true,
+		"removeComments": true,
+		"declaration": false,
+		"sourceMap": true,
+		"minify": false
+	},
+	"sass": {
+		"outputStyle": "expanded",
+		"sourceMap": false
 	}
 }

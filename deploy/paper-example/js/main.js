@@ -25,6 +25,7 @@ function initializePath() {
         var point = new paper.Point(width / points * i, center.y);
         path.add(point);
     }
+    console.log('here');
     path.add(paper.view.bounds.bottomRight);
     path.fullySelected = true;
 }

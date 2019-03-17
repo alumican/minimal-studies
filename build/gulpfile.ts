@@ -9,8 +9,8 @@ type Mapping = { src:string, dst:string };
 type Project = { name:string, js:Mapping[], css:Mapping[], html:Mapping[] };
 type ProjectDefault = { js:Mapping[], css:Mapping[], html:Mapping[] };
 type Projects = Project[];
-type Path = { src:string, deploy:string };
-type Config = { projects:Projects, default:ProjectDefault, path:Path, typeScript?:any, server?:any };
+type Path = { src:string, dst:string };
+type Config = { projects:Projects, default:ProjectDefault, path:Path, typeScript?:any, sass?:any, server?:any };
 
 
 
@@ -22,9 +22,7 @@ type Config = { projects:Projects, default:ProjectDefault, path:Path, typeScript
 // common
 const gulp:Gulp = require('gulp');
 const plumber:GulpModule = require('gulp-plumber');
-const tap:GulpModule = require('gulp-tap');
 const sourcemaps:GulpModule = require('gulp-sourcemaps');
-const connect:GulpModule = require('gulp-connect');
 
 // TypeScript
 const typescript:GulpModule = require('gulp-typescript');
@@ -32,11 +30,13 @@ const uglify:GulpModule = require('gulp-uglify');
 
 // Sass
 const sass:GulpModule = require('gulp-sass');
-const cleanCss:GulpModule = require('gulp-clean-css');
 
 // HTML
 const removeEmptyLines:GulpModule = require('gulp-remove-empty-lines');
 const stripComments:GulpModule = require('gulp-strip-comments');
+
+// Server
+const connect:GulpModule = require('gulp-connect');
 
 
 
@@ -54,10 +54,25 @@ function getOption(option:any, key:string, defaultValue:any):any {
 	return typeof option[key] !== 'undefined' ? option[key] : defaultValue;
 }
 
+// check TypeScript option
 const typeScriptOption:any = config.typeScript || {};
-typeScriptOption.declaration = getOption(typeScriptOption, 'declaration', false);
-typeScriptOption.removeComments = getOption(typeScriptOption, 'removeComments', true);
 typeScriptOption.typeRoots = getOption(typeScriptOption, 'typeRoots', ['node_modules/@types/']);
+typeScriptOption.removeComments = getOption(typeScriptOption, 'removeComments', true);
+
+const typeScriptOptionDeclaration:boolean = getOption(typeScriptOption, 'declaration', false);
+delete typeScriptOption.declaration;
+
+const typeScriptOptionMinify:boolean = getOption(typeScriptOption, 'minify', false);
+delete typeScriptOption.minify;
+
+const typeScriptOptionSourceMap:boolean = getOption(typeScriptOption, 'sourceMap', false);
+delete typeScriptOption.sourceMap;
+
+// check Sass option
+const sassOption:any = config.sass || {};
+
+const sassOptionSourceMap:boolean = getOption(sassOption, 'sourceMap', false);
+delete sassOption.sourceMap;
 
 
 
@@ -90,60 +105,70 @@ const color:any = {
 	lightMagenta: '\u001b[95m',
 	lightCyan   : '\u001b[96m',
 
-	reset  : '\u001b[0m'
+	reset : '\u001b[0m'
 };
 
-function getTypescriptOptions(outputFileName:string = ''):any {
-	if (outputFileName != '') {
+function getTypescriptOptions(outputFileName:string, minify:boolean):any {
+	if (minify) {
+		typeScriptOption.outFile = outputFileName.replace(/js$/, 'min.js');
+		typeScriptOption.declaration = false;
+	} else {
 		typeScriptOption.outFile = outputFileName;
+		typeScriptOption.declaration = typeScriptOptionDeclaration;
 	}
 	return typeScriptOption;
 }
 
-function registerTask(taskName:string, projectName:string, map:Mapping, getCommands:GetCommandsFunction) {
-	const srcPath:string = path.src + '/' + projectName + '/' + map.src;
-	const dstPath:string = path.deploy + '/' + projectName + '/' + map.dst;
+function registerTask(taskName:string, projectName:string, map:Mapping, getExecutionCommands:GetCommandsFunction) {
+	const srcPath:string = '../' + path.src + '/' + projectName + '/' + map.src;
+	const dstPath:string = '../' + path.dst + '/' + projectName + '/' + map.dst;
+
+	const srcFileName:string = srcPath.split('/').pop();
+
+	const dstPaths:string[] = dstPath.split('/');
+	const dstFileName:string = dstPaths.pop();
+	const dstDirectory:string = dstPaths.join('/');
 
 	gulp.task(taskName, function() {
-		const command:any = gulp.src(srcPath, { allowEmpty: true })
-			.pipe(plumber())
-			.pipe(tap(function(file:any, t:any) {
-				const srcFileName:string = srcPath.split('/').pop();
-
-				const dstPaths:string[] = dstPath.split('/');
-				const dstFileName:string = dstPaths.pop();
-				const dstDirectory:string = dstPaths.join('/');
-
-				console.log(indent + 'Compiling \'' + color.blue + srcPath + color.reset + '\'' + color.lightGray + ' -> ' + color.reset + '\'' + color.blue + dstPath + color.reset + '\'');
-
-				// create pipeline
-				let pipeline:any = gulp.src(file.path);
-				pipeline = pipeline.pipe(plumber());
-				const commands:any[] = getCommands(srcFileName, dstFileName);
-				for (let i:number = 0; i < commands.length; ++i) {
-					pipeline = pipeline.pipe(commands[i]);
-				}
-				pipeline = pipeline.pipe(gulp.dest(dstDirectory));
-				return pipeline;
-			}));
-
-		if (config.server && config.server.livereload) {
-			command.pipe(connect.reload());
+		let pipeline:any = gulp
+			.src(srcPath, { allowEmpty: true })
+			.pipe(plumber());
+		
+		// execution
+		const commands:any[] = getExecutionCommands(srcFileName, dstFileName);
+		for (let i:number = 0; i < commands.length; ++i) {
+			pipeline = pipeline.pipe(commands[i]);
 		}
 
-		return command;
+		// output
+		pipeline = pipeline.pipe(gulp.dest(dstDirectory));
+
+		// livereload
+		if (config.server && config.server.livereload) {
+			pipeline = pipeline.pipe(connect.reload());
+		}
+	
+		return pipeline;
 	});
+
 	defaultTaskNames.push(taskName);
 }
 
-function registerTypeScript(projectName:string, map:Mapping, index:number):string {
-	const taskName:string = projectName + '-typescript-' + index;
+function registerTypeScript(projectName:string, map:Mapping, index:number, minify:boolean):string {
+	const taskName:string = projectName + '-typescript-' + index + (minify ? '-min' : '');
 	registerTask(taskName, projectName, map, function(srcFileName:string, dstFileName:string):any[] {
-		return [
-			sourcemaps.init('./'),
-			typescript(getTypescriptOptions(dstFileName)),
-			sourcemaps.write('./')
-		]
+		const commands:any[] = [];
+		if (typeScriptOptionSourceMap) {
+			commands.push(sourcemaps.init('./'));
+		}
+		commands.push(typescript(getTypescriptOptions(dstFileName, minify)));
+		if (minify) {
+			commands.push(uglify());
+		};
+		if (typeScriptOptionSourceMap) {
+			commands.push(sourcemaps.write('./'));
+		}
+		return commands;
 	});
 	return taskName;
 }
@@ -151,11 +176,15 @@ function registerTypeScript(projectName:string, map:Mapping, index:number):strin
 function registerSass(projectName:string, map:Mapping, index:number):string {
 	const taskName:string = projectName + '-sass-' + index;
 	registerTask(taskName, projectName, map, function(srcFileName:string, dstFileName:string):any[] {
-		return [
-			sass().on('error', sass.logError),
-			cleanCss(),
-			sourcemaps.write('./')
-		];
+		const commands:any[] = [];
+		if (sassOptionSourceMap) {
+			commands.push(sourcemaps.init('./'));
+		}
+		commands.push(sass(sassOption).on('error', sass.logError));
+		if (sassOptionSourceMap) {
+			commands.push(sourcemaps.write('./'));
+		}
+		return commands;
 	});
 	return taskName;
 }
@@ -179,9 +208,15 @@ function registerProject(project:Project):void {
 	{
 		const maps:Mapping[] = project.js || projectDefault.js;
 		if (maps) {
+			let taskName:string;
 			for (let i:number = 0; i < maps.length; ++i) {
-				const taskName:string = registerTypeScript(projectName, maps[i], i);
+				taskName = registerTypeScript(projectName, maps[i], i, false);
 				typeScriptTaskNames.push(taskName);
+
+				if (typeScriptOptionMinify) {
+					taskName = registerTypeScript(projectName, maps[i], i, true);
+					typeScriptTaskNames.push(taskName);
+				}
 			}
 		}
 	}
@@ -209,7 +244,7 @@ function registerProject(project:Project):void {
 	}
 
 	const taskName:string = projectName + '-watch';
-	const projectSrc:string = path.src + '/' + projectName;
+	const projectSrc:string = '../' + path.src + '/' + projectName;
 	gulp.task(taskName, function():void {
 		if (typeScriptTaskNames.length > 0) {
 			gulp.watch(projectSrc + '/**/*.ts', gulp.series(typeScriptTaskNames));
@@ -227,7 +262,7 @@ function registerProject(project:Project):void {
 function registerServer():void {
 	const optopn:any = config.server;
 	if (optopn) {
-		optopn.root = path.deploy;
+		optopn.root = '../' + path.dst;
 		optopn.host = getOption(optopn, 'host', 'localhost');
 		optopn.port = getOption(optopn, 'port', 8000);
 		optopn.livereload = getOption(optopn, 'livereload', true);
