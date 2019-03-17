@@ -7,7 +7,7 @@ type GetCommandsFunction = (srcFileName:string, dstFileName:string) => any[];
 
 type Mapping = { src:string, dst:string };
 type Project = { name:string, js:Mapping[], css:Mapping[], html:Mapping[] };
-type ProjectDefault = { js:Mapping[], css:Mapping[], html:Mapping[] };
+type ProjectDefault = { js?:Mapping[], css?:Mapping[], html?:Mapping[] };
 type Projects = Project[];
 type Path = { src:string, dst:string };
 type Config = { projects:Projects, default:ProjectDefault, path:Path, typeScript?:any, sass?:any, server?:any };
@@ -47,7 +47,7 @@ const connect:GulpModule = require('gulp-connect');
 
 const config:Config = require('./config.json');
 const projects:Projects = config.projects;
-const projectDefault:ProjectDefault = config.default;
+const projectDefault:ProjectDefault = config.default || {};
 const path:Path = config.path;
 
 function getOption(option:any, key:string, defaultValue:any):any {
@@ -133,7 +133,7 @@ function registerTask(taskName:string, projectName:string, map:Mapping, getExecu
 		let pipeline:any = gulp
 			.src(srcPath, { allowEmpty: true })
 			.pipe(plumber());
-		
+
 		// execution
 		const commands:any[] = getExecutionCommands(srcFileName, dstFileName);
 		for (let i:number = 0; i < commands.length; ++i) {
@@ -147,7 +147,7 @@ function registerTask(taskName:string, projectName:string, map:Mapping, getExecu
 		if (config.server && config.server.livereload) {
 			pipeline = pipeline.pipe(connect.reload());
 		}
-	
+
 		return pipeline;
 	});
 
@@ -266,7 +266,7 @@ function registerServer():void {
 		optopn.host = getOption(optopn, 'host', 'localhost');
 		optopn.port = getOption(optopn, 'port', 8000);
 		optopn.livereload = getOption(optopn, 'livereload', true);
-	
+
 		console.log(indent + 'Starting server');
 		gulp.task('server', function():void {
 			connect.server(optopn);
