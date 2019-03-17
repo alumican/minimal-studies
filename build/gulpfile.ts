@@ -108,6 +108,12 @@ const color:any = {
 	reset : '\u001b[0m'
 };
 
+function createPath(...names:string[]):string {
+	return names.filter(function(value:string):boolean {
+		return value != '';
+	}).join('/');
+}
+
 function getTypescriptOptions(outputFileName:string, minify:boolean):any {
 	if (minify) {
 		typeScriptOption.outFile = outputFileName.replace(/js$/, 'min.js');
@@ -120,8 +126,8 @@ function getTypescriptOptions(outputFileName:string, minify:boolean):any {
 }
 
 function registerTask(taskName:string, projectName:string, map:Mapping, getExecutionCommands:GetCommandsFunction) {
-	const srcPath:string = '../' + path.src + '/' + projectName + '/' + map.src;
-	const dstPath:string = '../' + path.dst + '/' + projectName + '/' + map.dst;
+	const srcPath:string = createPath('..', path.src, projectName, map.src);
+	const dstPath:string = createPath('..', path.dst, projectName, map.dst);
 
 	const srcFileName:string = srcPath.split('/').pop();
 
@@ -133,6 +139,8 @@ function registerTask(taskName:string, projectName:string, map:Mapping, getExecu
 		let pipeline:any = gulp
 			.src(srcPath, { allowEmpty: true })
 			.pipe(plumber());
+
+		console.log(indent + 'Compiling \'' + color.blue + srcPath + color.reset + '\'' + color.lightGray + ' -> ' + color.reset + '\'' + color.blue + dstPath + color.reset + '\'');
 
 		// execution
 		const commands:any[] = getExecutionCommands(srcFileName, dstFileName);
@@ -164,7 +172,7 @@ function registerTypeScript(projectName:string, map:Mapping, index:number, minif
 		commands.push(typescript(getTypescriptOptions(dstFileName, minify)));
 		if (minify) {
 			commands.push(uglify());
-		};
+		}
 		if (typeScriptOptionSourceMap) {
 			commands.push(sourcemaps.write('./'));
 		}
@@ -244,7 +252,7 @@ function registerProject(project:Project):void {
 	}
 
 	const taskName:string = projectName + '-watch';
-	const projectSrc:string = '../' + path.src + '/' + projectName;
+	const projectSrc:string = createPath('..', path.src, projectName);
 	gulp.task(taskName, function():void {
 		if (typeScriptTaskNames.length > 0) {
 			gulp.watch(projectSrc + '/**/*.ts', gulp.series(typeScriptTaskNames));
