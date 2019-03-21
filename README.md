@@ -9,7 +9,7 @@ This is a project template for quickly starting visual prototyping with JavaScri
 
 ## Getting Started
 1. `node.js`をインストールする https://nodejs.org/
-2. [zipをダウンロード](https://github.com/alumican/minimal-studies/archive/master.zip)して解凍する
+2. [ここからzipをダウンロード](https://github.com/alumican/minimal-studies/archive/master.zip)して解凍する
 3. ターミナルで`minimal-studies-master`ディレクトリに移動する
 4. ターミナルで`./build.sh`を実行してインストールする
 5. ターミナルで`./build.sh watch`を実行するとファイル監視を始め、サーバが起動する
