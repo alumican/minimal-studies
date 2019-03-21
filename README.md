@@ -9,11 +9,12 @@ This is a project template for quickly starting visual prototyping with JavaScri
 
 ## Getting Started
 1. `node.js`をインストールする https://nodejs.org/
-2. ターミナルで`minimal-studies`ディレクトリに移動する
-3. ターミナルで`./build.sh`を実行してインストールする
-4. ターミナルで`./build.sh watch`を実行するとファイル監視を始め、サーバが起動する
-5. プロジェクト`src/xxx-example`に含まれる`.ts` `.scss` `.html`を更新すると、該当プロジェクトが`deploy`以下に自動的にコンパイルされる
-6. http://localhost:8765/ へアクセスして実行結果を確認する
+2. [zipをダウンロード](https://github.com/alumican/minimal-studies/archive/master.zip)して解凍する
+3. ターミナルで`minimal-studies-master`ディレクトリに移動する
+4. ターミナルで`./build.sh`を実行してインストールする
+5. ターミナルで`./build.sh watch`を実行するとファイル監視を始め、サーバが起動する
+6. プロジェクト`src/xxx-example`に含まれる`.ts` `.scss` `.html`を更新すると、該当プロジェクトが`deploy`以下に自動的にコンパイルされる
+7. http://localhost:8765/ へアクセスして実行結果を確認する
 
 ## Create Your Project
 1. `src`ディレクトリ直下に、任意の名前のディレクトリを作成する
